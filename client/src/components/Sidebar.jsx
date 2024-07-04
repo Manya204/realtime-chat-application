@@ -1,15 +1,30 @@
 import React from "react";
 import Conversation from "./Conversation";
 import { Button } from "@mui/material";
+import useLogout from "../hooks/useLogout";
 
 export default function Sidebar() {
+  const { loading, logout } = useLogout();
   return (
-    <div className="sidebar-container" style={{ height: "100%", position: "relative" }}>
+    <div
+      className="sidebar-container"
+      style={{ height: "100%", position: "relative" }}
+    >
       <div
         className="d-flex align-items-center justify-content-center justify-content-lg-start"
-        style={{ position: "sticky", top: 0, background: "white", zIndex: 1, padding: "1rem 0" }}
+        style={{
+          position: "sticky",
+          top: 0,
+          background: "white",
+          zIndex: 1,
+          padding: "1rem 0",
+        }}
       >
-        <form className="col-12 col-lg-auto mb-0 me-lg-3 d-flex align-items-center" role="search" style={{ width: "100%" }}>
+        <form
+          className="col-12 col-lg-auto mb-0 me-lg-3 d-flex align-items-center"
+          role="search"
+          style={{ width: "100%" }}
+        >
           <input
             type="search"
             className="form-control flex-grow-1"
@@ -30,7 +45,10 @@ export default function Sidebar() {
           </svg>
         </form>
       </div>
-      <div className="sidebar-content" style={{ height: "calc(100% - 120px)", overflowY: "auto" }}>
+      <div
+        className="sidebar-content"
+        style={{ height: "calc(100% - 120px)", overflowY: "auto" }}
+      >
         <div className="conversation-list">
           <Conversation />
           <Conversation />
@@ -42,10 +60,30 @@ export default function Sidebar() {
           <Conversation />
         </div>
       </div>
-      <div className="logout-button" style={{ position: "sticky", bottom: 0, background: "white", padding: "1rem", zIndex: 1 }}>
-        <Button variant="contained" color="secondary" fullWidth>
-          Logout
-        </Button>
+      <div
+        className="logout-button"
+        style={{
+          position: "sticky",
+          bottom: 0,
+          background: "white",
+          padding: "1rem",
+          zIndex: 1,
+        }}
+      >
+        {!loading ? (
+          <Button
+            variant="contained"
+            color="secondary"
+            fullWidth
+            onClick={logout}
+          >
+            Logout
+          </Button>
+        ) : (
+          <div className="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        )}
       </div>
     </div>
   );

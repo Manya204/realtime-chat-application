@@ -1,19 +1,20 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebookF, faGoogle, faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import '../App.css';
 import { useNavigate } from 'react-router-dom';
+import useLogin from '../hooks/useLogin';
+
+
 
 function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
-  };
-
-  const handleSocialLogin = (provider) => {
-    console.log(`Logging in with ${provider}`);
   };
 
   const handleForgotPassword = () => {
@@ -25,6 +26,13 @@ function Login() {
     backgroundImage: "url('https://i.postimg.cc/3JQQwnwb/Screenshot-339.png')",
   };
 
+  const { loading, login } = useLogin();
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    await login(email,password)
+  };
+
   return (
     <div className="App1" style={bgStyle}>
       <div className="container d-flex justify-content-center align-items-center min-vh-100">
@@ -33,14 +41,28 @@ function Login() {
             <h2>Welcome to Chit-Chat</h2>
             <p>Signin to Continue</p>
           </div>
-          <form className="form">
+          <form className="form" onSubmit={handleSubmit}>
             <div className="form-group mb-3">
-              <input type="email" className="form-control" placeholder="Email" required />
+              <input
+                type="email"
+                className="form-control"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
             </div>
             <div className="form-group mb-3 position-relative">
-              <input type={showPassword ? "text" : "password"} className="form-control" placeholder="Password" required />
+              <input
+                type={showPassword ? "text" : "password"}
+                className="form-control"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
               <FontAwesomeIcon 
-                icon={showPassword ? "fa-eye-slash" : "fa-eye"} 
+                icon={showPassword ? faEyeSlash : faEye} 
                 className="position-absolute password-toggle-icon" 
                 style={{ right: '10px', top: '50%', transform: 'translateY(-50%)', cursor: 'pointer' }} 
                 onClick={togglePasswordVisibility} 
@@ -53,18 +75,6 @@ function Login() {
               <button type="button" className="btn btn-link p-0" onClick={handleForgotPassword}>Forgot Password?</button>
             </div>
             <button type="submit" className="btn btn-primary w-100 mb-3">Login</button>
-            <div className="social-login text-center mb-3">
-              <p>Or login with</p>
-              <button className="btn btn-primary mr-2" onClick={() => handleSocialLogin('Facebook')}>
-                <FontAwesomeIcon icon={faFacebookF} /> Facebook
-              </button>
-              <button className="btn btn-danger mr-2" onClick={() => handleSocialLogin('Google')}>
-                <FontAwesomeIcon icon={faGoogle} /> Google
-              </button>
-              <button className="btn btn-info" onClick={() => handleSocialLogin('Twitter')}>
-                <FontAwesomeIcon icon={faTwitter} /> Twitter
-              </button>
-            </div>
           </form>
           <div className="switch-form text-center">
             <p>Don't have an account? <button onClick={() => navigate('/signup')} className="btn btn-link p-0">Signup</button></p>
