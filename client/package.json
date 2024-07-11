@@ -16,9 +16,11 @@
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@mui/material": "^5.15.21",
     "@popperjs/core": "^2.11.8",
+    "axios": "^1.7.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-hot-toast": "^2.4.1"
+    "react-hot-toast": "^2.4.1",
+    "socket.io-client": "^4.7.5"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",

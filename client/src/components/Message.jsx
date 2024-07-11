@@ -1,22 +1,29 @@
-import React from "react";
-import Avatar from "@mui/material/Avatar";
-import { Typography } from "@mui/material";
+import React from 'react';
+import { Typography } from '@mui/material';
+import BadgeAvatars from './BadgeAvatars';
 
-
-const Message = ({ message, fromMe }) => {
-  const bubbleColor = fromMe ? "bg-primary text-white" : "bg-light";
-  const alignClass = fromMe ? "align-self-end" : "align-self-start";
+const Message = ({ message, fromMe, loggedInUserProfile, otherUserProfile }) => {
+  const bubbleColor = fromMe ? 'bg-light' : 'bg-primary text-white';
+  const alignClass = fromMe ? 'align-self-end' : 'align-self-start';
 
   return (
-    <div className={`d-flex mb-2 justify-content-${fromMe ? 'end' : 'start'}`}>
+    <div className={`d-flex mb-2 justify-content-${fromMe ? 'start' : 'end'}`}>
       {!fromMe && (
-        <Avatar alt="User Avatar" src="https://cdn0.iconfinder.com/data/icons/communication-line-10/24/account_profile_user_contact_person_avatar_placeholder-512.png" />
+        <BadgeAvatars src={otherUserProfile} alt="Other User Avatar" />
       )}
-      <div className={`p-2 rounded-3 border border-2 ${bubbleColor} ${alignClass}`} style={{ maxWidth: '70%', wordWrap: 'break-word' }}>
+      <div
+        className={`p-2 rounded-3 border border-2 ${bubbleColor} ${alignClass}`}
+        style={{ maxWidth: '70%', wordWrap: 'break-word' }}
+      >
         <Typography variant="body1">{message}</Typography>
       </div>
+      {fromMe && (
+        <BadgeAvatars src={loggedInUserProfile} alt="Logged In User Avatar" />
+      )}
     </div>
   );
 };
 
 export default Message;
+
+

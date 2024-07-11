@@ -4,11 +4,11 @@ import MessageContainer from "./MessageContainer";
 import NoChat from "./NoChat";
 
 export default function Home() {
-  const [chatSelected, setChatSelected] = useState(false);
+  const [selectedUser, setSelectedUser] = useState(null);
 
-  // Function to toggle chat selection
-  const handleChatSelection = () => {
-    setChatSelected(!chatSelected);
+  // Function to handle chat selection
+  const handleChatSelection = (user) => {
+    setSelectedUser(user);
   };
 
   return (
@@ -19,7 +19,11 @@ export default function Home() {
             <Sidebar onChatSelect={handleChatSelection} />
           </div>
           <div style={{ flex: "1 0 70%", height: "100%", overflowY: "auto" }}>
-            {chatSelected ? <MessageContainer /> : <NoChat />}
+            {selectedUser ? (
+              <MessageContainer user={selectedUser} />
+            ) : (
+              <NoChat />
+            )}
           </div>
         </div>
       </div>

@@ -23,7 +23,14 @@ function Login() {
   };
 
   const bgStyle = {
-    backgroundImage: "url('https://i.postimg.cc/3JQQwnwb/Screenshot-339.png')",
+    backgroundImage: "url('https://i.postimg.cc/PfznKk6g/1.png')",
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    minHeight: '100vh',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   };
 
   const { loading, login } = useLogin();

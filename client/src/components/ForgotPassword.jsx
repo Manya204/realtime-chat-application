@@ -6,9 +6,15 @@ function ForgotPassword() {
   const navigate = useNavigate();
 
   const bgStyle = {
-    backgroundImage: "url('https://i.postimg.cc/3JQQwnwb/Screenshot-339.png')",
+    backgroundImage: "url('https://i.postimg.cc/PfznKk6g/1.png')",
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    minHeight: '100vh',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   };
-
   return (
     <div className="App1" style={bgStyle}>
       <div className="container d-flex justify-content-center align-items-center min-vh-100">
